@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Neighborhood Map</title>
+        <!-- Glyphicon alternative -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- My Custom CSS -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h4>Neighborhood locations</h4>
+                </div>
+                <div class="locations-list">
+                    <div class="input-group">
+                        <input id="filter-text" type="text" placeholder="Ex: Zoo" data-bind="value: filterString, valueUpdate: 'afterkeydown'">
+                        <div class="btn btn-info filter-tag">
+                            <i class="fas fa-filter"></i>
+                            <span>Filter</span>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled components" data-bind="foreach: filteredLocations">
+                        <li data-bind="text: name, click: $parent.setFilteredLocation.bind($data)">Loading Gogle Maps and Yelp...</li>
+                        <hr>
+                    </ul>
+                </div>
+                <div class="selected-location-info" data-bind="with: currentFilteredLocation">
+                    <h4 data-bind="text: name"></h4>
+                    <p>Address: <span data-bind="text: address"></span></p>
+                    <p>Yelp rating: <span data-bind="text: yelpRating" class="thick"></span>, reviews: <span data-bind="text: yelpReviewCount" class="thick"></span></p>
+                    <p class="yelp-url"><a class="sidebar-link" data-bind="attr: { href: yelpUrl}" target="_blank">Click me for more Yelp...</a></p>
+                </div>
+            </nav>
+            <!-- Page Content Holder -->
+            <div id="content">
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+                <div id="map"></div>
+            </div>
+        </div>  
+         
+        <!-- jQuery -->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap Js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Knockout Js -->
+        <script src="js/knockout-3.4.2.js"></script>
+        <script src="js/app.js"></script>
+        <!-- Google maps API -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY&libraries=places,drawing,geometry&v=3&callback=initMap" onerror="googleMapsError()"></script>
+    </body>
+</html>
+
+
+
